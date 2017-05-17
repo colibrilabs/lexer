@@ -15,7 +15,7 @@
     "colibriphp/loader": "~0.1",
     "colibriphp/cache": "~1.0"
   },
-  "autoload-dev": {
+  "autoload": {
     "psr-4": { "Colibri\\Lexer\\": "src" }
   }
 }
