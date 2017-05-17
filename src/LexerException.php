@@ -1,10 +1,10 @@
 <?php
 
-namespace Jix3\Lexer;
+namespace Colibri\Lexer;
 
 /**
  * Class LexerException
- * @package Jix3\Lexer
+ * @package Colibri\Lexer
  */
 class LexerException extends \Exception
 {
