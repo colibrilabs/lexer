@@ -187,6 +187,23 @@ abstract class AbstractLexer implements \Iterator
   }
   
   /**
+   * @param $token
+   * @return string
+   */
+  public function getLiteral($token)
+  {
+    $reflection = new \ReflectionClass(static::class);
+    
+    foreach ($reflection->getConstants() as $name => $constant) {
+      if ($token === $constant) {
+        return sprintf('%s::%s', static::class, $constant);
+      }
+    }
+    
+    return $token;
+  }
+  
+  /**
    * @return void
    */
   protected function tokenize()
