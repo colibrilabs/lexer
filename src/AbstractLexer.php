@@ -16,6 +16,11 @@ abstract class AbstractLexer implements \Iterator
   const TOKEN = 'token';
   
   /**
+   * @var array|null
+   */
+  public $token;
+  
+  /**
    * @var string
    */
   private $input;
@@ -24,11 +29,6 @@ abstract class AbstractLexer implements \Iterator
    * @var array
    */
   private $tokens = [];
-  
-  /**
-   * @var array|null
-   */
-  private $token;
   
   /**
    * @var int
