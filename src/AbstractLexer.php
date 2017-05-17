@@ -123,6 +123,14 @@ abstract class AbstractLexer implements \Iterator
   }
   
   /**
+   * @return array|null
+   */
+  public function getNext()
+  {
+    return $this->hasNext() ? $this->tokens[$this->position + 1] : null;
+  }
+  
+  /**
    * @param mixed $input
    */
   public function setInput($input)
