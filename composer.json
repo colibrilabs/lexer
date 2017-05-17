@@ -1,0 +1,21 @@
+{
+  "name": "colibriphp/lexer",
+  "description": "Abstract Lexer",
+  "keywords": ["lexer"],
+  "authors": [
+    {
+      "name": "Ivan Hontarenko",
+      "email": "stewie.dev@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "type": "library",
+  "require": {
+    "php": ">=5.6",
+    "colibriphp/loader": "~0.1",
+    "colibriphp/cache": "~1.0"
+  },
+  "autoload-dev": {
+    "psr-4": { "Colibri\\Lexer\\": "src" }
+  }
+}
