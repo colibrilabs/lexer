@@ -204,7 +204,7 @@ abstract class AbstractLexer implements \Iterator
     
     foreach ($reflection->getConstants() as $name => $constant) {
       if ($token === $constant) {
-        return sprintf('%s::%s', static::class, $constant);
+        return sprintf('%s::%s', static::class, $name);
       }
     }
     
