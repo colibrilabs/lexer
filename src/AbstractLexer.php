@@ -159,9 +159,18 @@ abstract class AbstractLexer implements \Iterator
    * @param $token
    * @return bool
    */
-  protected function toToken($token)
+  public function toToken($token)
   {
     return ($this->isNext($token) && $this->next()) ? true : false;
+  }
+  
+  /**
+   * @param array $tokens
+   * @return bool
+   */
+  public function toTokenAny(array $tokens)
+  {
+    return ($this->isNextAny($tokens) && $this->next()) ? true : false;
   }
   
   /**
@@ -171,6 +180,15 @@ abstract class AbstractLexer implements \Iterator
   public function isNext($token)
   {
     return $this->hasNext() && ($this->tokens[$this->position + 1][static::TYPE] === $token);
+  }
+  
+  /**
+   * @param array $tokens
+   * @return bool
+   */
+  public function isNextAny(array $tokens)
+  {
+    return $this->hasNext() && in_array($this->tokens[$this->position + 1][static::TYPE], $tokens, true);
   }
   
   /**
