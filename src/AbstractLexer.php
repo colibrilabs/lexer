@@ -146,11 +146,22 @@ abstract class AbstractLexer implements \Iterator
    * @param $token
    * @return array|null
    */
-  public function skipUntil($token)
+  public function shiftTo($token)
   {
-    while ($this->isValid() && $this->token[static::TYPE] !== $token) $this->next();
+    while ($this->isValid() && !$this->isNext($token)) {
+      $this->next();
+    }
     
     return $this->current();
+  }
+  
+  /**
+   * @param $token
+   * @return bool
+   */
+  protected function toToken($token)
+  {
+    return ($this->isNext($token) && $this->next()) ? true : false;
   }
   
   /**
