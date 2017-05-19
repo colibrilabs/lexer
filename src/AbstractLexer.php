@@ -99,6 +99,19 @@ abstract class AbstractLexer implements \Iterator
   }
   
   /**
+   * @return bool
+   */
+  public function previous()
+  {
+    $this->peek = 1;
+    $this->position--;
+  
+    $this->token = $this->isValid() ? $this->tokens[$this->position] : null;
+  
+    return $this->isValid();
+  }
+  
+  /**
    * @return mixed|null
    */
   public function peek()
@@ -123,11 +136,27 @@ abstract class AbstractLexer implements \Iterator
   }
   
   /**
+   * @return bool
+   */
+  public function hasPrevious()
+  {
+    return isset($this->tokens[$this->position - 1]);
+  }
+  
+  /**
    * @return array|null
    */
   public function getNext()
   {
     return $this->hasNext() ? $this->tokens[$this->position + 1] : null;
+  }
+  
+  /**
+   * @return array|null
+   */
+  public function getPrevious()
+  {
+    return $this->hasNext() ? $this->tokens[$this->position - 1] : null;
   }
   
   /**
@@ -157,6 +186,19 @@ abstract class AbstractLexer implements \Iterator
   
   /**
    * @param $token
+   * @return array|null
+   */
+  public function unshiftTo($token)
+  {
+    while ($this->isValid() && !$this->isPrevious($token)) {
+      $this->previous();
+    }
+    
+    return $this->current();
+  }
+  
+  /**
+   * @param $token
    * @return bool
    */
   public function toToken($token)
@@ -177,6 +219,24 @@ abstract class AbstractLexer implements \Iterator
    * @param $token
    * @return bool
    */
+  public function backToToken($token)
+  {
+    return ($this->isPrevious($token) && $this->previous()) ? true : false;
+  }
+  
+  /**
+   * @param array $tokens
+   * @return bool
+   */
+  public function backToTokenAny(array $tokens)
+  {
+    return ($this->isPreviousAny($tokens) && $this->previous()) ? true : false;
+  }
+  
+  /**
+   * @param $token
+   * @return bool
+   */
   public function isNext($token)
   {
     return $this->hasNext() && ($this->tokens[$this->position + 1][static::TYPE] === $token);
@@ -189,6 +249,24 @@ abstract class AbstractLexer implements \Iterator
   public function isNextAny(array $tokens)
   {
     return $this->hasNext() && in_array($this->tokens[$this->position + 1][static::TYPE], $tokens, true);
+  }
+  
+  /**
+   * @param $token
+   * @return bool
+   */
+  public function isPrevious($token)
+  {
+    return $this->hasPrevious() && ($this->tokens[$this->position - 1][static::TYPE] === $token);
+  }
+  
+  /**
+   * @param array $tokens
+   * @return bool
+   */
+  public function isPreviousAny(array $tokens)
+  {
+    return $this->hasPrevious() && in_array($this->tokens[$this->position - 1][static::TYPE], $tokens, true);
   }
   
   /**
