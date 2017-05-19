@@ -38,7 +38,7 @@ abstract class AbstractLexer implements \Iterator
   /**
    * @var int
    */
-  private $peek = 0;
+  private $peek = 1;
   
   /**
    * @inheritDoc
@@ -90,7 +90,7 @@ abstract class AbstractLexer implements \Iterator
    */
   public function next()
   {
-    $this->peek = 0;
+    $this->peek = 1;
     $this->position++;
   
     $this->token = $this->isValid() ? $this->tokens[$this->position] : null;
@@ -103,7 +103,7 @@ abstract class AbstractLexer implements \Iterator
    */
   public function peek()
   {
-    return isset($this->tokens[$this->position + $this->peek]) ? $this->tokens[$this->position + $this->peek++] : null;
+    return isset($this->tokens[$this->position + $this->peek + 1]) ? $this->tokens[$this->position + $this->peek++ + 1] : null;
   }
   
   /**
