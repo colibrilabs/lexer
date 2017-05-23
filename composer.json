@@ -1,5 +1,5 @@
 {
-  "name": "colibriphp/lexer",
+  "name": "colibrilabs/lexer",
   "description": "Abstract Lexer",
   "keywords": ["lexer"],
   "authors": [
