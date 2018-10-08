@@ -1,10 +1,10 @@
 <?php
 
-namespace Colibri\Lexer;
+namespace Subapp\Lexer;
 
 /**
  * Class AbstractLexer
- * @package Colibri\Lexer
+ * @package Subapp\Lexer
  */
 abstract class AbstractLexer implements \Iterator
 {

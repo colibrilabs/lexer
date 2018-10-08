@@ -30,7 +30,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Cache\\": "src/"
+                    "Subapp\\Cache\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -45,7 +45,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Colibri Cache Component",
+            "description": "Subapp Cache Component",
             "keywords": [
                 "cache",
                 "colibri cache",
@@ -74,7 +74,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Loader\\": "src/"
+                    "Subapp\\Loader\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",

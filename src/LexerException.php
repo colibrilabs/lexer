@@ -1,10 +1,10 @@
 <?php
 
-namespace Colibri\Lexer;
+namespace Subapp\Lexer;
 
 /**
  * Class LexerException
- * @package Colibri\Lexer
+ * @package Subapp\Lexer
  */
 class LexerException extends \Exception
 {
