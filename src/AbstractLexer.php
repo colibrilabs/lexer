@@ -259,25 +259,29 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     {
         $position = ($this->position + 1);
 
-        return $this->hasNext() && ($this->tokens[$position]->getToken() === $token);
+        return $this->hasNext() && ($this->tokens[$position]->getType() === $token);
     }
 
     /**
      * @param array $tokens
-     * @return bool
+     * @return boolean
      */
     public function isNextAny(array $tokens)
     {
-        return $this->hasNext() && in_array($this->tokens[$this->position + 1][static::TYPE], $tokens, true);
+        $position = ($this->position + 1);
+
+        return $this->hasNext() && in_array($this->tokens[$position]->getType(), $tokens, true);
     }
 
     /**
      * @param $token
-     * @return bool
+     * @return boolean
      */
     public function isPrevious($token)
     {
-        return $this->hasPrevious() && ($this->tokens[$this->position - 1][static::TYPE] === $token);
+        $position = ($this->position - 1);
+
+        return $this->hasPrevious() && ($this->tokens[$position]->getType() === $token);
     }
 
     /**
@@ -286,7 +290,9 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function isPreviousAny(array $tokens)
     {
-        return $this->hasPrevious() && in_array($this->tokens[$this->position - 1][static::TYPE], $tokens, true);
+        $position = ($this->position - 1);
+
+        return $this->hasPrevious() && in_array($this->tokens[$position]->getType(), $tokens, true);
     }
 
     /**
