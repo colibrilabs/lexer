@@ -119,7 +119,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function peek()
     {
-        return isset($this->tokens[$this->position + $this->peek + 1]) ? $this->tokens[$this->position + $this->peek++ + 1] : null;
+        return isset($this->tokens[$this->position + $this->peek + 1]) ? $this->tokens[$this->position + ++$this->peek] : null;
     }
     
     /**
