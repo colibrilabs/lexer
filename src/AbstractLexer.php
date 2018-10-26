@@ -320,6 +320,14 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
+     * @return null|string
+     */
+    public function getTokenValue()
+    {
+        return $this->isValid() ? $this->token->getPosition() : null;
+    }
+
+    /**
      * @return integer
      */
     public function getTokenPosition()
