@@ -26,7 +26,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     private $input;
 
     /**
-     * @var array
+     * @var array|TokenInterface[]
      */
     private $tokens = [];
 
@@ -128,7 +128,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function hasNext()
     {
@@ -136,7 +136,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function hasPrevious()
     {
@@ -144,7 +144,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return array|null
+     * @return TokenInterface|null
      */
     public function getNext()
     {
@@ -152,7 +152,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return array|null
+     * @return TokenInterface|null
      */
     public function getPrevious()
     {
@@ -160,7 +160,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @param mixed $input
+     * @param string $input
      */
     public function setInput($input)
     {
@@ -173,7 +173,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
 
     /**
      * @param $token
-     * @return array|null
+     * @return TokenInterface|null
      */
     public function forwardTo($token)
     {
@@ -186,7 +186,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
 
     /**
      * @param $token
-     * @return array|null
+     * @return TokenInterface|null
      */
     public function backwardTo($token)
     {
@@ -199,7 +199,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
 
     /**
      * @param $token
-     * @return bool
+     * @return boolean
      */
     public function toToken($token)
     {
@@ -208,7 +208,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
 
     /**
      * @param array $tokens
-     * @return bool
+     * @return boolean
      */
     public function toTokenAny(array $tokens)
     {
@@ -217,7 +217,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
 
     /**
      * @param $token
-     * @return bool
+     * @return boolean
      */
     public function backToToken($token)
     {
@@ -226,7 +226,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
 
     /**
      * @param array $tokens
-     * @return bool
+     * @return boolean
      */
     public function backToTokenAny(array $tokens)
     {
@@ -257,7 +257,9 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function isNext($token)
     {
-        return $this->hasNext() && ($this->tokens[$this->position + 1][static::TYPE] === $token);
+        $position = ($this->position + 1);
+
+        return $this->hasNext() && ($this->tokens[$position]->getToken() === $token);
     }
 
     /**
@@ -288,7 +290,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getInput()
     {
@@ -296,7 +298,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return array
+     * @return array|TokenInterface[]
      */
     public function getTokens()
     {

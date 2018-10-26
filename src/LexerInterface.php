@@ -65,89 +65,89 @@ interface LexerInterface
     public function hasPrevious();
 
     /**
-     * @return array|null
+     * @return TokenInterface|null
      */
     public function getNext();
 
     /**
-     * @return array|null
+     * @return TokenInterface|null
      */
     public function getPrevious();
 
     /**
-     * @param mixed $input
+     * @param string $input
      */
     public function setInput($input);
 
     /**
      * @param $token
-     * @return array|null
+     * @return TokenInterface|null
      */
     public function forwardTo($token);
 
     /**
      * @param $token
-     * @return array|null
+     * @return TokenInterface|null
      */
     public function backwardTo($token);
 
     /**
      * @param $token
-     * @return bool
+     * @return boolean
      */
     public function toToken($token);
 
     /**
      * @param array $tokens
-     * @return bool
+     * @return boolean
      */
     public function toTokenAny(array $tokens);
 
     /**
      * @param $token
-     * @return bool
+     * @return boolean
      */
     public function backToToken($token);
 
     /**
      * @param array $tokens
-     * @return bool
+     * @return boolean
      */
     public function backToTokenAny(array $tokens);
 
     /**
      * @param $token
-     * @return bool
+     * @return boolean
      */
     public function isCurrent($token);
 
     /**
      * @param array $tokens
-     * @return bool
+     * @return boolean
      */
     public function isCurrentAny(array $tokens);
 
     /**
      * @param $token
-     * @return bool
+     * @return boolean
      */
     public function isNext($token);
 
     /**
      * @param array $tokens
-     * @return bool
+     * @return boolean
      */
     public function isNextAny(array $tokens);
 
     /**
      * @param $token
-     * @return bool
+     * @return boolean
      */
     public function isPrevious($token);
 
     /**
      * @param array $tokens
-     * @return bool
+     * @return boolean
      */
     public function isPreviousAny(array $tokens);
 
@@ -157,15 +157,19 @@ interface LexerInterface
     public function getInput();
 
     /**
-     * @return array[]
+     * @return TokenInterface[]
      */
     public function getTokens();
 
     /**
-     * @return array
+     * @return TokenInterface
      */
     public function getToken();
 
+    /**
+     * @return string
+     */
+    public function getTokenValue();
     /**
      * @return integer
      */
