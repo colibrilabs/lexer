@@ -38,14 +38,6 @@ class Token implements TokenInterface
     }
 
     /**
-     * @inheritdoc
-     */
-    public function __debugInfo()
-    {
-        return ['token', sprintf('[%s]:%d at %d', $this->getToken(), $this->getType(), $this->getPosition()),];
-    }
-
-    /**
      * @return string
      */
     public function getToken()
