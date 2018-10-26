@@ -45,9 +45,19 @@ interface LexerInterface
     public function previous();
 
     /**
-     * @return mixed|null
+     * @return TokenInterface|null
      */
     public function peek();
+    
+    /**
+     * @param integer $steps
+     */
+    public function setPeek($steps = 1);
+    
+    /**
+     * @return void
+     */
+    public function resetPeek();
 
     /**
      * @return bool

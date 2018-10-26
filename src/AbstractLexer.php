@@ -14,6 +14,8 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     const TYPE = 'type';
     const POSITION = 'position';
     const TOKEN = 'token';
+    
+    const MAX_PEEK_STEPS = 5;
 
     /**
      * @var TokenInterface|null
@@ -90,7 +92,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function next()
     {
-        $this->peek = 1;
+        $this->setPeek(1);
         $this->position++;
 
         $this->token = $this->isValid() ? $this->tokens[$this->position] : null;
@@ -103,7 +105,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function previous()
     {
-        $this->peek = 1;
+        $this->setPeek(1);
         $this->position--;
 
         $this->token = $this->isValid() ? $this->tokens[$this->position] : null;
@@ -112,13 +114,29 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return mixed|null
+     * @return TokenInterface|null
      */
     public function peek()
     {
         return isset($this->tokens[$this->position + $this->peek + 1]) ? $this->tokens[$this->position + $this->peek++ + 1] : null;
     }
-
+    
+    /**
+     * @param int $steps
+     */
+    public function setPeek($steps = 1)
+    {
+        $this->peek = (integer)min(abs($steps), AbstractLexer::MAX_PEEK_STEPS);
+    }
+    
+    /**
+     * @return void
+     */
+    public function resetPeek()
+    {
+        $this->setPeek(1);
+    }
+    
     /**
      * @return bool
      */
