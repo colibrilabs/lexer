@@ -9,6 +9,8 @@ namespace Subapp\Lexer;
 abstract class AbstractLexer implements \Iterator, LexerInterface
 {
 
+    const T_UNDEFINED = -1;
+
     const TYPE = 'type';
     const POSITION = 'position';
     const TOKEN = 'token';
@@ -358,11 +360,8 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
         $matches = $this->parse($this->getInput());
 
         foreach ($matches as $match) {
-            list($token, $position) = $match;
-
-            if ($tokenResult = $this->processToken($token)) {
-                $tokenResult[static::POSITION] = $position;
-                $this->tokens[] = $tokenResult;
+            if (($token = $this->createToken($match)) && $this->isApplicable($token)) {
+                $this->tokens[] = $token;
             }
         }
     }
@@ -373,7 +372,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     protected function parse($input)
     {
-        $pattern = $this->getGeneratedPattern();
+        $pattern = $this->getPattern();
 
         $flags = PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_OFFSET_CAPTURE;
         $matches = preg_split($pattern, $input, -1, $flags);
@@ -384,13 +383,13 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     /**
      * @return string
      */
-    protected function getGeneratedPattern()
+    protected function getPattern()
     {
         static $pattern;
 
         if (null === $pattern) {
-            $catchable = implode('|', $this->getCatchablePatterns());
-            $nonCatchable = implode('|', $this->getNonCatchablePatterns());
+            $nonCatchable = implode('|', $this->getDummyPatterns());
+            $catchable = implode('|', $this->getPatterns());
             $pattern = sprintf('/(%s)|%s/%s', $catchable, $nonCatchable, $this->getModifiers());
         }
 
@@ -408,17 +407,42 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     /**
      * @return array
      */
-    abstract protected function getNonCatchablePatterns();
+    abstract protected function getDummyPatterns();
 
     /**
      * @return array
      */
-    abstract protected function getCatchablePatterns();
+    abstract protected function getPatterns();
 
     /**
-     * @param $token
-     * @return integer
+     * @param TokenInterface $token
+     * @return void
      */
-    abstract protected function processToken($token);
+    abstract protected function completeToken(TokenInterface $token);
+
+    /**
+     * @param TokenInterface $token
+     * @return boolean
+     */
+    abstract protected function isApplicable(TokenInterface $token);
+
+    /**
+     * @param array $matchToken
+     * @return TokenInterface
+     */
+    protected function createToken(array $matchToken)
+    {
+        // extract token value and token position
+        list($value, $position) = $matchToken;
+
+        // create token object without token type
+        $token = new Token($value, AbstractLexer::T_UNDEFINED, $position);
+
+        // definition token type and token value post-processing...
+        // it works at concrete class implementation
+        $this->completeToken($token);
+
+        return $token;
+    }
 
 }
