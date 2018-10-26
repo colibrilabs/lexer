@@ -16,7 +16,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     const TOKEN = 'token';
 
     /**
-     * @var array|null
+     * @var TokenInterface|null
      */
     public $token;
 
@@ -304,7 +304,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return mixed
+     * @return TokenInterface
      */
     public function getToken()
     {
@@ -312,19 +312,19 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getTokenPosition()
     {
-        return $this->token[self::POSITION];
+        return $this->token->getPosition();
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getTokenType()
     {
-        return $this->token[self::TYPE];
+        return $this->token->getType();
     }
 
     /**
