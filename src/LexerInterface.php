@@ -194,6 +194,11 @@ interface LexerInterface
      * @return integer
      */
     public function getPosition();
+    
+    /**
+     * @return void
+     */
+    public function resetPosition();
 
     /**
      * @param $token

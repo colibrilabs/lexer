@@ -40,7 +40,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     /**
      * @var int
      */
-    private $peek = 1;
+    private $peek = 0;
 
     /**
      * @inheritDoc
@@ -83,6 +83,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     {
         $this->token = null;
         $this->position = 0;
+        $this->peek = 0;
 
         return $this;
     }
@@ -92,7 +93,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function next()
     {
-        $this->setPeek(1);
+        $this->setPeek(0);
         $this->position++;
 
         $this->token = $this->isValid() ? $this->tokens[$this->position] : null;
@@ -105,7 +106,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function previous()
     {
-        $this->setPeek(1);
+        $this->setPeek(0);
         $this->position--;
 
         $this->token = $this->isValid() ? $this->tokens[$this->position] : null;
@@ -134,7 +135,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function resetPeek()
     {
-        $this->setPeek(1);
+        $this->peek = 0;
     }
     
     /**
@@ -368,7 +369,15 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     {
         return $this->position;
     }
-
+    
+    /**
+     * @return void
+     */
+    public function resetPosition()
+    {
+        $this->position = 0;
+    }
+    
     /**
      * @param $token
      * @return string
