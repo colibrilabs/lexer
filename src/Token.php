@@ -84,5 +84,23 @@ class Token implements TokenInterface
     {
         $this->position = $position;
     }
-
+    
+    /**
+     * @param integer $token
+     * @return boolean
+     */
+    public function is($token)
+    {
+        return ($this->type === $token);
+    }
+    
+    /**
+     * @param integer $value
+     * @return boolean
+     */
+    public function isValue($value)
+    {
+        return ($this->token === $value);
+    }
+    
 }

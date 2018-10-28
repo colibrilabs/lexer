@@ -38,5 +38,17 @@ interface TokenInterface
      * @param integer $position
      */
     public function setPosition($position);
+    
+    /**
+     * @param integer $token
+     * @return boolean
+     */
+    public function is($token);
+    
+    /**
+     * @param integer $value
+     * @return boolean
+     */
+    public function isValue($value);
 
 }
