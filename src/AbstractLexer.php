@@ -121,6 +121,27 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     {
         return isset($this->tokens[$this->position + $this->peek + 1]) ? $this->tokens[$this->position + ++$this->peek] : null;
     }
+
+    /**
+     * @param integer $increaser
+     * @param integer $decreaser
+     * @return TokenInterface
+     */
+    public function peekBeyond($increaser, $decreaser)
+    {
+        $counter = 0;
+        $token = $this->peek();
+
+        do {
+            if ($token->is($increaser) || $token->is($decreaser)) {
+                $counter = ($counter + ($token->is($increaser) ? 1 : -1));
+            }
+        } while ($counter > 0 && ($token = $this->peek()));
+
+        $this->resetPeek();
+
+        return $token;
+    }
     
     /**
      * @param int $steps

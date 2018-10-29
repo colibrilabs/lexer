@@ -48,6 +48,13 @@ interface LexerInterface
      * @return TokenInterface|null
      */
     public function peek();
+
+    /**
+     * @param integer $increaser
+     * @param integer $decreaser
+     * @return TokenInterface
+     */
+    public function peekBeyond($increaser, $decreaser);
     
     /**
      * @param integer $steps
