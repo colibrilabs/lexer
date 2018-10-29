@@ -125,9 +125,10 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     /**
      * @param integer $increaser
      * @param integer $decreaser
+     * @param bool $resetPeek
      * @return TokenInterface
      */
-    public function peekBeyond($increaser, $decreaser)
+    public function peekBeyond($increaser, $decreaser, $resetPeek = false)
     {
         $counter = 0;
         $token = $this->peek();
@@ -138,7 +139,9 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
             }
         } while ($counter > 0 && ($token = $this->peek()));
 
-        $this->resetPeek();
+        if (true === $resetPeek) {
+            $this->resetPeek();
+        }
 
         return $token;
     }
