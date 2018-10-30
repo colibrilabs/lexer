@@ -134,6 +134,13 @@ interface LexerInterface
     public function backToTokenAny(array $tokens);
 
     /**
+     * @param integer $type
+     * @param integer $limit
+     * @return boolean
+     */
+    public function isTokenNearby($type, $limit = 3);
+
+    /**
      * @param $token
      * @return boolean
      */

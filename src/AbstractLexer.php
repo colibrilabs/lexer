@@ -277,6 +277,24 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
 
     /**
+     * @param integer $type
+     * @param integer $limit
+     * @return boolean
+     */
+    public function isTokenNearby($type, $limit = 3)
+    {
+        $hasToken = false;
+
+        while ($limit-- > 0 && !$hasToken && ($token = $this->peek())) {
+            $hasToken = $token->is($type);
+        }
+
+        $this->resetPeek();
+
+        return $hasToken;
+    }
+
+    /**
      * @param $token
      * @return bool
      */
