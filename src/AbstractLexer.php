@@ -134,7 +134,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
         $token = $this->peek();
         
         do {
-            if ($token->is($increaser) || $token->is($decreaser)) {
+            if ($token && ($token->is($increaser) || $token->is($decreaser))) {
                 $counter = ($counter + ($token->is($increaser) ? 1 : -1));
             }
         } while ($counter > 0 && ($token = $this->peek()));
