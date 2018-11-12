@@ -59,6 +59,19 @@ interface LexerInterface
     
     /**
      * @param integer $steps
+     * @return TokenInterface
+     */
+    public function increasePeek($steps = 1);
+    
+    /**
+     * @param integer $steps
+     * @return TokenInterface
+     */
+    public function decreasePeek($steps = 1);
+    
+    
+    /**
+     * @param integer $steps
      */
     public function setPeek($steps = 1);
     

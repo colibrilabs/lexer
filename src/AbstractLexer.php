@@ -147,6 +147,30 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
     
     /**
+     * @inheritdoc
+     */
+    public function increasePeek($steps = 1)
+    {
+        $steps = (integer)min(abs($steps), AbstractLexer::MAX_PEEK_STEPS);
+    
+        $this->peek = $this->peek - $steps + 1;
+    
+        return $this->peek();
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function decreasePeek($steps = 1)
+    {
+        $steps = (integer)min(abs($steps), AbstractLexer::MAX_PEEK_STEPS);
+        
+        $this->peek = $this->peek + $steps - 1;
+        
+        return $this->peek();
+    }
+    
+    /**
      * @param int $steps
      */
     public function setPeek($steps = 1)
