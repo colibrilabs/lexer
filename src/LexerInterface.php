@@ -69,11 +69,15 @@ interface LexerInterface
      */
     public function decreasePeek($steps = 1);
     
-    
     /**
      * @param integer $steps
      */
     public function setPeek($steps = 1);
+    
+    /**
+     * @return integer
+     */
+    public function getPeek();
     
     /**
      * @return void

@@ -179,6 +179,14 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     }
     
     /**
+     * @return integer
+     */
+    public function getPeek()
+    {
+        return $this->peek;
+    }
+    
+    /**
      * @return void
      */
     public function resetPeek()
