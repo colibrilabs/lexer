@@ -152,9 +152,9 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     public function increasePeek($steps = 1)
     {
         $steps = (integer)min(abs($steps), AbstractLexer::MAX_PEEK_STEPS);
-    
-        $this->peek = $this->peek - $steps + 1;
-    
+        
+        $this->peek = $this->peek + $steps - 1;
+        
         return $this->peek();
     }
     
@@ -165,7 +165,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     {
         $steps = (integer)min(abs($steps), AbstractLexer::MAX_PEEK_STEPS);
         
-        $this->peek = $this->peek + $steps - 1;
+        $this->peek = $this->peek - $steps + 1;
         
         return $this->peek();
     }
