@@ -257,9 +257,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function forwardTo($token)
     {
-        while ($this->isValid() && !$this->isNext($token)) {
-            $this->next();
-        }
+        while ($this->next() && !$this->isCurrent($token));
         
         return $this->current();
     }
@@ -270,9 +268,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
      */
     public function backwardTo($token)
     {
-        while ($this->isValid() && !$this->isPrevious($token)) {
-            $this->previous();
-        }
+        while ($this->previous() && !$this->isCurrent($token));
         
         return $this->current();
     }
