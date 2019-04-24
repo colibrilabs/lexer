@@ -15,7 +15,7 @@ abstract class AbstractLexer implements \Iterator, LexerInterface
     const POSITION = 'position';
     const TOKEN    = 'token';
     
-    const MAX_PEEK_STEPS = 5;
+    const MAX_PEEK_STEPS = 10;
     
     /**
      * @var TokenInterface|null
